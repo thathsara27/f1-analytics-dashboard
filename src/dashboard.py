@@ -1,4 +1,6 @@
 import streamlit as st
+from src.analysis.telemetry_analysis import get_fastest_lap_telemetry
+from src.visualization.telemetry_charts import create_speed_comparison
 
 from src.analysis.lap_analysis import (
     load_race_session,
@@ -69,6 +71,16 @@ def main():
         "Driver 2",
         driver_codes,
         index=driver_codes.index("PIA")
+    )
+
+    telemetry_1 = get_fastest_lap_telemetry(
+        session,
+        driver_1
+    )
+
+    telemetry_2 = get_fastest_lap_telemetry(
+        session,
+        driver_2
     )
 
     st.header(
@@ -304,3 +316,26 @@ def main():
                 "Lap Consistency",
                 f"{performance_2['lap_consistency']:.3f} s"
             )
+
+    st.divider()
+
+    st.header("📡 Telemetry Analysis")
+
+    st.subheader("⚡ Speed Comparison")
+
+    if telemetry_1 is not None and telemetry_2 is not None:
+
+        speed_chart = create_speed_comparison(
+            telemetry_1,
+            telemetry_2,
+            driver_1,
+            driver_2
+        )
+
+        st.plotly_chart(
+            speed_chart,
+            width="stretch"
+        )
+
+    else:
+        st.warning("Telemetry data is not available for one or both drivers.")
