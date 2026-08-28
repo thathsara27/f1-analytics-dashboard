@@ -15,7 +15,6 @@ from src.visualization.lap_charts import (
     create_lap_time_chart
 )
 
-
 def main():
 
     st.set_page_config(
@@ -190,13 +189,11 @@ def main():
 
             st.progress(progress_value)
 
-
     with col1:
         display_strategy(
             driver_1,
             strategy_1
         )
-
 
     with col2:
         display_strategy(
@@ -210,7 +207,8 @@ def main():
     }
 
     fig = create_lap_time_chart(
-        driver_data
+        driver_data,
+        session
     )
 
     st.plotly_chart(
