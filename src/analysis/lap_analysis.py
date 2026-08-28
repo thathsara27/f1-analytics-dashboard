@@ -2,13 +2,18 @@ import fastf1
 import streamlit as st
 
 @st.cache_resource
-
 def load_race_session(year, grand_pix, session_name):
     """Load an F1 session using FastF1."""
     session = fastf1.get_session(year, grand_pix, session_name)
     session.load()
 
     return session
+
+@st.cache_data
+def get_event_schedule(year):
+    """Return the race calendar for a given season."""
+    schedule = fastf1.get_event_schedule(year)
+    return schedule[schedule["EventFormat"] != "testing"]
 
 def get_driver_laps(session, driver):
     """Return clean lap data for a specific driver."""
