@@ -22,7 +22,7 @@ def create_lap_time_chart(driver_data):
             )
         )
 
-        fig.update_layout(
+    fig.update_layout(
         title="Driver Lap-Time Comparison",
         xaxis_title="Lap Number",
         yaxis_title="Lap Time (seconds)",
