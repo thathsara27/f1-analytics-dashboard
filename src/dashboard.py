@@ -17,6 +17,30 @@ from src.visualization.lap_charts import (
     create_lap_time_chart
 )
 
+def apply_custom_css():
+    st.markdown("""
+        <style>
+        .stApp {
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+        }
+        h1, h2, h3 {
+            color: #e10600 !important;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+        [data-testid="stSidebar"] {
+            background-color: #151515;
+            border-right: 2px solid #e10600;
+        }
+        [data-testid="stMetricValue"] {
+            color: #e10600;
+        }
+        hr {
+            border-color: #e10600 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
 def main():
 
     st.set_page_config(
@@ -24,6 +48,8 @@ def main():
         page_icon="🏎️",
         layout="wide"
     )
+
+    apply_custom_css()
 
     st.title("🏎️ F1 Analytics")
     st.caption("Formula 1 Telemetry & Strategy Dashboard")
