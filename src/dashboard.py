@@ -1,6 +1,7 @@
 import streamlit as st
 from src.analysis.telemetry_analysis import get_fastest_lap_telemetry
 from src.visualization.telemetry_charts import create_speed_comparison
+from datetime import datetime
 
 from src.analysis.lap_analysis import (
     load_race_session,
@@ -8,7 +9,8 @@ from src.analysis.lap_analysis import (
     get_race_summary,
     get_driver_performance,
     format_lap_time,
-    get_tire_strategy
+    get_tire_strategy,
+    get_event_schedule
 )
 
 from src.visualization.lap_charts import (
@@ -28,19 +30,24 @@ def main():
 
     st.sidebar.header("Race Selection")
 
+    current_year = datetime.now().year
+
     year = st.sidebar.selectbox(
         "Season",
-        [2024]
+        list(range(current_year, 2017, -1))
     )
+
+    schedule = get_event_schedule(year)
+    event_names = schedule["EventName"].tolist()
 
     grand_prix = st.sidebar.selectbox(
         "Grand Prix",
-        ["Monza"]
+        event_names
     )
 
     session_name = st.sidebar.selectbox(
         "Session",
-        ["Race"]
+        ["Race", "Qualifying", "Sprint", "FP1", "FP2", "FP3"]
     )
 
     session = load_race_session(
@@ -51,25 +58,19 @@ def main():
 
     summary = get_race_summary(session)
 
-    # Get driver abbreviations from the lap data
-    driver_info = (
-        session.laps[["Driver", "DriverNumber"]]
-        .drop_duplicates()
-        .sort_values("Driver")
-    )
-
-    driver_codes = driver_info["Driver"].tolist()
+    # Get driver abbreviations from the full entry list (includes DNS/DNF drivers)
+    driver_codes = sorted(session.results["Abbreviation"].tolist())
 
     driver_1 = st.sidebar.selectbox(
         "Driver 1",
         driver_codes,
-        index=driver_codes.index("LEC")
+        index=0
     )
 
     driver_2 = st.sidebar.selectbox(
         "Driver 2",
         driver_codes,
-        index=driver_codes.index("PIA")
+        index=1
     )
 
     telemetry_1 = get_fastest_lap_telemetry(
