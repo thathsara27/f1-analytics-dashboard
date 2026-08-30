@@ -28,6 +28,17 @@ def apply_custom_css():
             color: #e10600 !important;
             font-family: 'Trebuchet MS', sans-serif;
         }
+        [data-testid="stSidebar"] label {
+            color: #f5f5f5 !important;
+            font-weight: 600;
+        }
+        [data-testid="stSidebar"] [data-baseweb="select"] > div {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+        }
+        [data-testid="stSidebar"] [data-baseweb="select"] > div:hover {
+            border: 1px solid #e10600;
+        }
         [data-testid="stSidebar"] {
             background-color: #151515;
             border-right: 2px solid #e10600;
