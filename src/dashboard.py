@@ -35,6 +35,12 @@ def apply_custom_css():
         [data-testid="stMetricValue"] {
             color: #e10600;
         }
+        [data-testid="stMetric"] {
+            background-color: #1a1a1a;
+            border: 1px solid #e10600;
+            border-radius: 8px;
+            padding: 16px;
+        }
         hr {
             border-color: #e10600 !important;
         }
