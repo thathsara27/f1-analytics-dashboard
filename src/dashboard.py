@@ -71,6 +71,15 @@ def main():
     st.title("🏎️ F1 Analytics")
     st.caption("Formula 1 Telemetry & Strategy Dashboard")
 
+    st.markdown(
+    """
+    <div style="height: 6px; background: repeating-linear-gradient(
+        45deg, #e10600, #e10600 10px, #0a0a0a 10px, #0a0a0a 20px
+    ); margin: 8px 0 16px 0;"></div>
+    """,
+    unsafe_allow_html=True
+)
+
     st.sidebar.header("Race Selection")
 
     current_year = datetime.now().year
@@ -381,3 +390,13 @@ def main():
 
     else:
         st.warning("Telemetry data is not available for one or both drivers.")
+
+    
+    st.markdown(
+        """
+        <div style="height: 6px; background: repeating-linear-gradient(
+            45deg, #e10600, #e10600 10px, #0a0a0a 10px, #0a0a0a 20px
+        ); margin: 24px 0 8px 0;"></div>
+        """,
+        unsafe_allow_html=True
+    )
