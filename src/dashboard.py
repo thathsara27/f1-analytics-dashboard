@@ -28,6 +28,17 @@ def apply_custom_css():
             color: #e10600 !important;
             font-family: 'Trebuchet MS', sans-serif;
         }
+        [data-testid="stSidebar"] label {
+            color: #f5f5f5 !important;
+            font-weight: 600;
+        }
+        [data-testid="stSidebar"] [data-baseweb="select"] > div {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+        }
+        [data-testid="stSidebar"] [data-baseweb="select"] > div:hover {
+            border: 1px solid #e10600;
+        }
         [data-testid="stSidebar"] {
             background-color: #151515;
             border-right: 2px solid #e10600;
@@ -59,6 +70,15 @@ def main():
 
     st.title("🏎️ F1 Analytics")
     st.caption("Formula 1 Telemetry & Strategy Dashboard")
+
+    st.markdown(
+    """
+    <div style="height: 6px; background: repeating-linear-gradient(
+        45deg, #e10600, #e10600 10px, #0a0a0a 10px, #0a0a0a 20px
+    ); margin: 8px 0 16px 0;"></div>
+    """,
+    unsafe_allow_html=True
+)
 
     st.sidebar.header("Race Selection")
 
@@ -370,3 +390,13 @@ def main():
 
     else:
         st.warning("Telemetry data is not available for one or both drivers.")
+
+    
+    st.markdown(
+        """
+        <div style="height: 6px; background: repeating-linear-gradient(
+            45deg, #e10600, #e10600 10px, #0a0a0a 10px, #0a0a0a 20px
+        ); margin: 24px 0 8px 0;"></div>
+        """,
+        unsafe_allow_html=True
+    )
